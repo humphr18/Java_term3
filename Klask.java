@@ -97,5 +97,10 @@ public class Klask{
 		game1.addText(right_score);
 		game1.addText(top_text);
 		// end of the UI additions -----------------------
+		if(game1.downPressed() == true){
+			System.out.println("hello");
+		}
 	}
+
+
 }
