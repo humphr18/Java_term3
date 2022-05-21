@@ -40,6 +40,11 @@ public class Klask{
 	private Ball top_magnet = new Ball(400.0,175.0,10,"WHITE",3);
 	private Ball middle_magnet = new Ball(400.0,250.0,10,"WHITE",3);
 	private Ball bottom_magnet = new Ball(400.0,325.0,10,"WHITE",3);
+	// Creating the scores
+	private Text left_score = new Text("0",30,50.0,250.0,"WHITE",6);
+	private Text right_score = new Text("0",30,750.0,250.0,"WHITE",6);
+	// Creating the top text
+	private Text top_text = new Text("Welcome to Flask!!",20,100.0,50.0,"WHITE",6);
 
 /* UI instance variable list:
 	game1 = the game arena
@@ -53,7 +58,8 @@ public class Klask{
 	left_goal/right_goal = player goals
 	middle_line = middle line through the game
 	top_megnet/middle/bottom = the magnets
-
+	left/right_score = the scores
+	top_text = text above the game board
 */
 
 
@@ -87,6 +93,9 @@ public class Klask{
 		game1.addBall(top_magnet);
 		game1.addBall(middle_magnet);
 		game1.addBall(bottom_magnet);
+		game1.addText(left_score);
+		game1.addText(right_score);
+		game1.addText(top_text);
 		// end of the UI additions -----------------------
 	}
 }
