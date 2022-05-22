@@ -8,12 +8,12 @@ public class Klask{
 	private Line top_line = new Line(700.0,100.0,100.0,100.0,15.0,"GREY",4);
 	// Main game ball
 	private Ball the_ball = new Ball(350.0,250.0,10,"YELLOW",3);
-	// Generating the pucks left puck --v
-	private Ball left_puckball = new Ball(550.0,250.0,20,"BLACK",2);
-	private Line left_puckline = new Line(550.0,250.0,550.0,230.0,10,"BLACK",2);
-	// Right puck --v
-	private Ball right_puckball = new Ball(250.0,250.0,20,"BLACK",2);
-	private Line right_puckline = new Line(250.0,250.0,250.0,230.0,10,"BLACK",2);
+	// Generating the pucks right puck --v
+	private Ball right_puckball = new Ball(550.0,250.0,20,"BLACK",2);
+	private Line right_puckline = new Line(550.0,250.0,550.0,230.0,10,"BLACK",2);
+	// Left puck --v
+	private Ball left_puckball = new Ball(250.0,250.0,20,"BLACK",2);
+	private Line left_puckline = new Line(250.0,250.0,250.0,230.0,10,"BLACK",2);
 	// Making the quatercircles
 	private Ball topleft_ball = new Ball(100.0,100.0,100,"GREY",2);
 	private Ball bottomleft_ball = new Ball(100.0,400.0,100,"GREY",2);
@@ -40,13 +40,22 @@ public class Klask{
 	private Ball top_magnet = new Ball(400.0,175.0,10,"WHITE",3);
 	private Ball middle_magnet = new Ball(400.0,250.0,10,"WHITE",3);
 	private Ball bottom_magnet = new Ball(400.0,325.0,10,"WHITE",3);
+	// The scorecounts 
+	private int left_scorecount = 0;
+	private int right_scorecount = 0;
+	private String leftscore_string = Integer.toString(left_scorecount);
+	private String rightscore_string = Integer.toString(right_scorecount);
 	// Creating the scores
-	private Text left_score = new Text("0",30,50.0,250.0,"WHITE",6);
-	private Text right_score = new Text("0",30,750.0,250.0,"WHITE",6);
+	private Text left_score = new Text(leftscore_string,30,50.0,250.0,"WHITE",6);
+	private Text right_score = new Text(rightscore_string,30,750.0,250.0,"WHITE",6);
 	// Creating the top text
-	private Text top_text = new Text("Welcome to Flask!!",20,100.0,50.0,"WHITE",6);
-
+	private Text top_text = new Text("Welcome to Klask!!",20,100.0,50.0,"WHITE",6);
+	//loop to refresh the game
 	private boolean game_loop = true;
+	//the directions of the ball
+	private double ballmove_x = 5.0;
+	private double ballmove_y = 0.0;
+
 
 /* UI instance variable list:
 	game1 = the game arena
@@ -62,6 +71,7 @@ public class Klask{
 	top_megnet/middle/bottom = the magnets
 	left/right_score = the scores
 	top_text = text above the game board
+	game_loopp = boolean, loop through the game
 */
 
 
@@ -99,13 +109,96 @@ public class Klask{
 		game1.addText(right_score);
 		game1.addText(top_text);
 		// end of the UI additions -----------------------
-		while(game_loop == true);
+		while(game_loop == true){
 
-			if(game1.letterPressed('w') == true){
-				System.out.println("hello");
+			the_ball.move(ballmove_x,ballmove_y);
+
+
+			if(the_ball.collides(left_puckball) || the_ball.collides(right_puckball))
+			{
+				ballmove_y = ballmove_y - (ballmove_y * 2);
+				ballmove_x = ballmove_x - (ballmove_x * 2);
+			}
+			if(the_ball.collides(left_goal) || the_ball.collides(right_goal))
+			{
+				ballmove_y = 0;
+				ballmove_x = 0;
+
 			}
 
+			if(the_ball.getXPosition() == 690.0){
+				System.out.println("HELLO");
+			}
+
+
+			if(game1.letterPressed('w') == true)
+			{
+				left_puckball.move(0.0,-2.0);
+			}
+			if(game1.letterPressed('a') == true)
+			{
+				left_puckball.move(-2.0,0.0);
+			}
+			if(game1.letterPressed('d') == true)
+			{
+				left_puckball.move(2.0,0.0);
+			}
+			if(game1.letterPressed('s') == true)
+			{
+				left_puckball.move(0.0,2.0);
+			}
+			if(game1.rightPressed() == true)
+			{
+				right_puckball.move(2.0,0.0);
+			}
+			if(game1.leftPressed() == true)
+			{
+				right_puckball.move(-2.0,0.0);
+			}
+			if(game1.upPressed() == true)
+			{
+				right_puckball.move(0.0,-2.0);
+			}
+			if(game1.downPressed() == true)
+			{
+				right_puckball.move(0.0,2.0);
+			}
+			if(game1.letterPressed('i') == true)
+			{
+				the_ball.move(0.0,-2.0);
+			}
+			if(game1.letterPressed('j') == true)
+			{
+				the_ball.move(-2.0,0.0);
+			}
+			if(game1.letterPressed('l') == true)
+			{
+				the_ball.move(2.0,0.0);
+			}
+			if(game1.letterPressed('k') == true)
+			{
+				the_ball.move(0.0,2.0);
+			}
+			if (the_ball.collides(left_goal) == true )
+			{
+				left_scorecount = left_scorecount + 1;
+				leftscore_string = Integer.toString(left_scorecount);
+				left_score.setText(leftscore_string);
+			}
+			if (the_ball.collides(right_goal) == true)
+			{
+				right_scorecount = right_scorecount + 1;
+				rightscore_string = Integer.toString(right_scorecount);
+				right_score.setText(rightscore_string);
+			}
+
+
+
+
+
+
 			game1.pause();	
+		}
 	}
 
 
