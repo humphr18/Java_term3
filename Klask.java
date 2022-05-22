@@ -46,6 +46,8 @@ public class Klask{
 	// Creating the top text
 	private Text top_text = new Text("Welcome to Flask!!",20,100.0,50.0,"WHITE",6);
 
+	private boolean game_loop = true;
+
 /* UI instance variable list:
 	game1 = the game arena
 	left_line --> top_line = the borders
@@ -97,9 +99,13 @@ public class Klask{
 		game1.addText(right_score);
 		game1.addText(top_text);
 		// end of the UI additions -----------------------
-		if(game1.downPressed() == true){
-			System.out.println("hello");
-		}
+		while(game_loop == true);
+
+			if(game1.letterPressed('w') == true){
+				System.out.println("hello");
+			}
+
+			game1.pause();	
 	}
 
 
