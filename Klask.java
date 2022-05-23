@@ -68,12 +68,14 @@ public class Klask{
 	private double left_y;
 
 	//top magnet move variables 
-	private double top_x;
-	private double top_y;
-	private double middle_x;
+	private double top_x ;
+	private double top_y ;
+	private double middle_x ;
 	private double middle_y;
 	private double bottom_x;
-	private double bottom_y;
+	private double bottom_y ;
+
+	private boolean play_loop = true;
 
 	//connections
 	private boolean top_connect = false;
@@ -157,6 +159,7 @@ public class Klask{
 		game1.addBall(right_outer);
 		game1.addBall(left_outer);
 		// end of the UI additions -----------------------
+		while(play_loop == true){
 		while(game_loop == true){
 
 
@@ -555,22 +558,7 @@ public class Klask{
 					right_outer.move(0.0,2.0);
 				}
 			}
-			if(game1.letterPressed('i') == true)
-			{
-				the_ball.move(0.0,-2.0);
-			}
-			if(game1.letterPressed('j') == true)
-			{
-				the_ball.move(-2.0,0.0);
-			}
-			if(game1.letterPressed('l') == true)
-			{
-				the_ball.move(2.0,0.0);
-			}
-			if(game1.letterPressed('k') == true)
-			{
-				the_ball.move(0.0,2.0);
-			}
+
 			if((left_puckball.collides(top_magnet) && left_puckball.collides(middle_magnet)) || (left_puckball.collides(top_magnet) && left_puckball.collides(bottom_magnet)) || (left_puckball.collides(middle_magnet) && left_puckball.collides(bottom_magnet))){
 				right_scorecount = right_scorecount + 1;
 				rightscore_string = Integer.toString(right_scorecount);
@@ -592,7 +580,7 @@ public class Klask{
 			if((right_puckball.collides(top_magnet) && right_puckball.collides(middle_magnet)) || (right_puckball.collides(top_magnet) && right_puckball.collides(bottom_magnet)) || (right_puckball.collides(middle_magnet) && right_puckball.collides(bottom_magnet))){
 				left_scorecount = left_scorecount + 1;
 				leftscore_string = Integer.toString(left_scorecount);
-				right_score.setText(leftscore_string);
+				left_score.setText(leftscore_string);
 				the_ball.setXPosition(350.0);
 				the_ball.setYPosition(250.0);
 				ballmove_x = 0.0;
@@ -607,6 +595,83 @@ public class Klask{
 				bottom_magnet.setXPosition(400.0);
 				bottom_check = false;
 			}
+
+
+
+			top_magnet.move(top_x,top_y);
+			if(top_magnet.getXPosition() >= 690.0 || top_magnet.getXPosition() <= 110.0 )
+			{
+				if(top_x != 0.0){
+					top_x = top_x - (top_x * 2);
+				}
+				else
+				{
+					top_y = top_y - (top_y * 2);
+					top_x = top_x - (top_x * 2);
+				}
+			}
+			if(top_magnet.getYPosition() >=390.0 || top_magnet.getYPosition() <= 110.0)
+			{
+				if(top_x != 0.0){
+					top_y = top_y - (top_y * 2);
+				}
+				else
+				{
+					top_y = top_y - (top_y * 2);
+					top_x = top_x - (top_x * 2);
+				}
+			}
+
+
+			if(middle_magnet.getXPosition() >= 690.0 || middle_magnet.getXPosition() <= 110.0 )
+			{
+				if(middle_x != 0.0){
+					middle_x = middle_x - (middle_x * 2);
+				}
+				else
+				{
+					middle_y = middle_y - (middle_y * 2);
+					middle_x = middle_x - (middle_x * 2);
+				}
+			}
+			if(middle_magnet.getYPosition() >=390.0 || middle_magnet.getYPosition() <= 110.0)
+			{
+				if(middle_x != 0.0){
+					middle_y = middle_y - (middle_y * 2);
+				}
+				else
+				{
+					middle_y = middle_y - (middle_y * 2);
+					middle_x = middle_x - (middle_x * 2);
+				}
+			}
+
+
+			if(bottom_magnet.getXPosition() >= 690.0 || bottom_magnet.getXPosition() <= 110.0 )
+			{
+				if(bottom_x != 0.0){
+					bottom_x = bottom_x - (bottom_x * 2);
+				}
+				else
+				{
+					bottom_y = bottom_y - (bottom_y * 2);
+					bottom_x = bottom_x - (bottom_x * 2);
+				}
+			}
+			if(bottom_magnet.getYPosition() >=390.0 || bottom_magnet.getYPosition() <= 110.0)
+			{
+				if(bottom_x != 0.0){
+					bottom_y = bottom_y - (bottom_y * 2);
+				}
+				else
+				{
+					bottom_y = bottom_y - (bottom_y * 2);
+					bottom_x = bottom_x - (bottom_x * 2);
+				}
+			}
+
+
+
 			if (the_ball.collides(left_goal) == true )
 			{
 				right_scorecount = right_scorecount + 1;
@@ -714,6 +779,13 @@ public class Klask{
 
 			game1.pause();	
 		}
+		if(game1.enterPressed()){
+			game_loop = true;
+			left_scorecount = 0;
+			right_scorecount = 0;
+		}
+		}
+
 	}
 
 
