@@ -274,12 +274,30 @@ public class Klask{
 				right_scorecount = right_scorecount + 1;
 				rightscore_string = Integer.toString(right_scorecount);
 				right_score.setText(rightscore_string);
+				the_ball.setXPosition(350.0);
+				the_ball.setYPosition(250.0);
+				ballmove_x = 0.0;
+				ballmove_y = 0.0;
+				left_puckball.setXPosition(250.0);
+				left_puckball.setYPosition(250.0);
+				right_puckball.setXPosition(250.0);
+				right_puckball.setXPosition(550.0);
+
 			}
 			if(right_puckball.collides(right_goal))
 			{
 				left_scorecount = left_scorecount + 1;
 				leftscore_string = Integer.toString(left_scorecount);
 				left_score.setText(leftscore_string);
+				the_ball.setXPosition(450.0);
+				the_ball.setYPosition(250.0);
+				ballmove_x = 0.0;
+				ballmove_y = 0.0;
+				left_puckball.setXPosition(250.0);
+				left_puckball.setYPosition(250.0);
+				right_puckball.setXPosition(250.0);
+				right_puckball.setXPosition(55.0);
+
 			}
 /*			if(right_outer.collides(top_magnet) && top_connect == false){
 				right_x = right_puckball.getXPosition();
@@ -392,9 +410,10 @@ public class Klask{
 				right_score.setText(rightscore_string);
 				the_ball.setXPosition(350.0);
 				the_ball.setYPosition(250.0);
+				ballmove_x = 0.0;
+				ballmove_y = 0.0;
 
 			}
-
 			if (the_ball.collides(right_goal) == true)
 			{
 				left_scorecount = left_scorecount + 1;
@@ -402,6 +421,8 @@ public class Klask{
 				left_score.setText(leftscore_string);
 				the_ball.setXPosition(450.0);
 				the_ball.setYPosition(250.0);
+				ballmove_x = 0.0;
+				ballmove_y = 0.0;
 			}
 
 			if(left_scorecount== 6 || right_scorecount == 6)
