@@ -75,6 +75,7 @@ public class Klask{
 	private double bottom_x;
 	private double bottom_y ;
 
+	// the loop for the replay screen
 	private boolean play_loop = true;
 
 	//connections
@@ -97,8 +98,6 @@ public class Klask{
 	private boolean middle_check = false;
 	private boolean bottom_check = false;
 
-	private int right_magcount = 0;
-	private int left_magcount = 0;
 
 
 
@@ -159,10 +158,11 @@ public class Klask{
 		game1.addBall(right_outer);
 		game1.addBall(left_outer);
 		// end of the UI additions -----------------------
-		while(play_loop == true){
-		while(game_loop == true){
+		while(play_loop == true){ // loop for the restart option
+		while(game_loop == true){ // loop for the full game
 
 
+			// stops the game pieces from leaveing the game area
 			if(left_puckball.getXPosition() == 390.0){
 				left_stopcheck3 = false;
 			}
@@ -188,10 +188,11 @@ public class Klask{
 				right_stopcheck4 = false;
 			}
 
+			// setting the deflection of the ball against of the game pieces
 			if(the_ball.collides(left_puckball)){
-
+				//if statement checks the position of the ball against the gamepiece
 				if(the_ball.getXPosition() < (left_puckball.getXPosition() +5) && the_ball.getXPosition() > (left_puckball.getXPosition() - 5) && (the_ball.getYPosition() < (left_puckball.getYPosition()))){
-					ballmove_x = 0.0;
+					ballmove_x = 0.0; 
 					ballmove_y = -3.0;
 				}
 				else if(the_ball.getXPosition() < (left_puckball.getXPosition() +5) && the_ball.getXPosition() > (left_puckball.getXPosition() - 5) && (the_ball.getYPosition() > (left_puckball.getYPosition()))){
@@ -224,6 +225,8 @@ public class Klask{
 					ballmove_y = 0.0;
 				}
 			}
+
+			// Same deflection for the right gamepiece
 			if(the_ball.collides(right_puckball)){
 
 				if(the_ball.getXPosition() < (right_puckball.getXPosition() +5) && the_ball.getXPosition() > (right_puckball.getXPosition() - 5) && (the_ball.getYPosition() < (right_puckball.getYPosition()))){
@@ -261,11 +264,11 @@ public class Klask{
 				}
 			}
 
-
+			// deflects the ball from the game arena
 			if(the_ball.getXPosition() >= 690.0 || the_ball.getXPosition() <= 110.0 )
 			{
 				if(ballmove_y != 0.0){
-					ballmove_x = ballmove_x - (ballmove_x * 2);
+					ballmove_x = ballmove_x - (ballmove_x * 2); // changes the trajectory
 				}
 				else
 				{
@@ -286,28 +289,31 @@ public class Klask{
 			}
 			the_ball.move(ballmove_x,ballmove_y);
 
+			//resets the system if the gamepiece enter the goals
 			if(left_puckball.collides(left_goal))
 			{
 				right_scorecount = right_scorecount + 1;
 				rightscore_string = Integer.toString(right_scorecount);
-				right_score.setText(rightscore_string);
-				the_ball.setXPosition(350.0);
+				right_score.setText(rightscore_string); // inscreases the  score
+				the_ball.setXPosition(350.0); // resets the balls position
 				the_ball.setYPosition(250.0);
-				ballmove_x = 0.0;
-				ballmove_y = 0.0;
+				ballmove_x = 0.0; //stops the ball
+				ballmove_y = 0.0; //stops the ball
 				left_puckball.setXPosition(250.0);
 				left_puckball.setYPosition(250.0);
 				right_puckball.setXPosition(250.0);
 				right_puckball.setXPosition(550.0);
-				top_x = 0.0; top_y = 0.0; middle_x = 0.0; middle_y = 0.0; bottom_x = 0.0; bottom_y = 0.0;
+				top_x = 0.0; top_y = 0.0; middle_x = 0.0; middle_y = 0.0; bottom_x = 0.0; bottom_y = 0.0; // reset all of the magnet speeds
+				// puts the magnest back into place
 				top_magnet.setXPosition(400.0);
 				top_magnet.setYPosition(175.0);
 				middle_magnet.setYPosition(250.0);
 				bottom_magnet.setYPosition(325.0);
 				middle_magnet.setXPosition(400.0);
 				bottom_magnet.setXPosition(400.0);
-
+				// =======
 			}
+			// code for the right goal
 			if(right_puckball.collides(right_goal))
 			{
 				left_scorecount = left_scorecount + 1;
@@ -330,7 +336,8 @@ public class Klask{
 				bottom_magnet.setXPosition(400.0);
 
 			}
-			if(top_check == false){
+			// this function moves the magnets towards the center of the gamepiece
+			if(top_check == false){ // checks whether the top magnet can move
 				if(top_magnet.collides(right_outer)|| top_magnet.collides(left_outer)){
 					if(top_magnet.collides(right_outer)){
 						collide_ball = right_puckball;
@@ -339,7 +346,7 @@ public class Klask{
 						collide_ball = left_puckball;
 					}
 					if(top_magnet.getXPosition() < (collide_ball.getXPosition() +5) && top_magnet.getXPosition() > (collide_ball.getXPosition() - 5) && (top_magnet.getYPosition() < (collide_ball.getYPosition()))){
-						top_x = 0.0;
+						top_x = 0.0; // move towards the gamepiece
 						top_y = 1.0;
 					}
 					else if(top_magnet.getXPosition() < (collide_ball.getXPosition() +5) && top_magnet.getXPosition() > (collide_ball.getXPosition() - 5) && (top_magnet.getYPosition() > (collide_ball.getYPosition()))){
@@ -373,6 +380,7 @@ public class Klask{
 					}
 				}
 			}
+			// same for the middle magnet
 			if(middle_check == false){
 				if(middle_magnet.collides(right_outer) || middle_magnet.collides(left_outer)){
 					if(middle_magnet.collides(right_outer)){
@@ -417,6 +425,7 @@ public class Klask{
 					}
 				}
 			}
+			// same for the bottom magnet
 			if(bottom_check == false){
 				if(bottom_magnet.collides(right_outer) || bottom_magnet.collides(left_outer)){
 					if(bottom_magnet.collides(right_outer)){
@@ -461,17 +470,21 @@ public class Klask{
 						bottom_y = 0.0;
 					}
 				}
-			}
-			top_magnet.move(top_x,top_y);
+			} 
+
+			// sets the magnets moving
+			top_magnet.move(top_x,top_y); 
 			middle_magnet.move(middle_x,middle_y);
 			bottom_magnet.move(bottom_x, bottom_y);
+			// ----------------------
 
+			//setting the collisions with the gamepieces
 			if(top_magnet.collides(right_puckball)){
 				top_x = 0.0;
-				top_y = 0.0;
-				top_magnet.setXPosition(right_puckball.getXPosition());
+				top_y = 0.0; // stops the magnets from moving
+				top_magnet.setXPosition(right_puckball.getXPosition()); // traps them (attaches) them to the gamepiece 
 				top_magnet.setYPosition(right_puckball.getYPosition());
-				top_check = true;
+				top_check = true; // stops them from being allowed to move
 			}
 			if(middle_magnet.collides(right_puckball)){
 				middle_x = 0.0;
@@ -512,7 +525,7 @@ public class Klask{
 
 
 
-
+			// movement for the gamepieces 
 			if(game1.letterPressed('w') == true)
 			{
 				if(left_stopcheck2 == true){
@@ -572,8 +585,11 @@ public class Klask{
 					right_outer.move(0.0,4.0);
 				}
 			}
+			// end of movement ---------------
 
+			// checks whether there are two magent attacked to the gamepieces
 			if((left_puckball.collides(top_magnet) && left_puckball.collides(middle_magnet)) || (left_puckball.collides(top_magnet) && left_puckball.collides(bottom_magnet)) || (left_puckball.collides(middle_magnet) && left_puckball.collides(bottom_magnet))){
+				// if so add points and restart game. 
 				right_scorecount = right_scorecount + 1;
 				rightscore_string = Integer.toString(right_scorecount);
 				right_score.setText(leftscore_string);
@@ -616,7 +632,8 @@ public class Klask{
 
 
 
-			top_magnet.move(top_x,top_y);
+
+			//  stops the magnets from leaving game arena *same code as the stopping ball from leaving the game arena*
 			if(top_magnet.getXPosition() >= 690.0 || top_magnet.getXPosition() <= 110.0 )
 			{
 				if(top_x != 0.0){
@@ -687,9 +704,10 @@ public class Klask{
 					bottom_x = bottom_x - (bottom_x * 2);
 				}
 			}
+			// end of trapping magnets --------------------
 
 
-
+			// adds the points to the score if ball enters into the goal
 			if (the_ball.collides(left_goal) == true )
 			{
 				right_scorecount = right_scorecount + 1;
@@ -729,17 +747,21 @@ public class Klask{
 
 			}
 
+			//stops game is score is max
 			if(left_scorecount== 6 || right_scorecount == 6)
 			{
 				top_text.setText("FINISHED! Press 'r' to restart");
 				game_loop = false;
 			}
+
+			//slows down the ball
 			if (ballmove_x < 0.0)
 			{
-				ballmove_x = ballmove_x + 0.01;
+				ballmove_x = ballmove_x + 0.01; // increase number if moving backwards
 			}
+
 			if (ballmove_x > 0.0){
-				ballmove_x = ballmove_x - 0.01;
+				ballmove_x = ballmove_x - 0.01; // decrease number if moving forwards 
 			}
 			if(ballmove_y < 0.0){
 				ballmove_y = ballmove_y + 0.01;
@@ -786,6 +808,7 @@ public class Klask{
 			if (bottom_y > 0.0){
 				bottom_y = bottom_y - 0.01;
 			}
+			// resets the checks
 			left_stopcheck3 = true;
 			right_stopcheck3 = true;
 			left_stopcheck1 = true;
@@ -797,6 +820,7 @@ public class Klask{
 
 			game1.pause();	
 		}
+		// for the restart
 		if(game1.letterPressed('r')){
 			game_loop = true;
 			left_scorecount = 0;
@@ -805,6 +829,8 @@ public class Klask{
 			left_score.setText(leftscore_string);
 			rightscore_string = Integer.toString(right_scorecount);
 			right_score.setText(rightscore_string);
+			top_text.setText("REMATCH!");
+
 		}
 		game1.pause();
 		}
