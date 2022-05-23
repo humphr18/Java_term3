@@ -7,7 +7,7 @@ public class Klask{
 	private Line right_line = new Line(700.0,400.0,700.0,100.0,15.0,"GREY",4);
 	private Line top_line = new Line(700.0,100.0,100.0,100.0,15.0,"GREY",4);
 	// Main game ball
-	private Ball the_ball = new Ball(350.0,250.0,10,"YELLOW",6);
+	private Ball the_ball = new Ball(400.0,300.0,10,"YELLOW",6);
 	// Generating the pucks right puck --v
 	private Ball right_puckball = new Ball(550.0,250.0,20,"BLACK",2);
 	private Line right_puckline = new Line(550.0,250.0,550.0,230.0,10,"BLACK",2);
@@ -53,8 +53,8 @@ public class Klask{
 	//loop to refresh the game
 	private boolean game_loop = true;
 	//the directions of the ball
-	private double ballmove_x = 2;
-	private double ballmove_y = 2;
+	private double ballmove_x = 0.0;
+	private double ballmove_y = 0.0;
 	// The outer suction for the white magnets
 	private Ball left_outer = new Ball(250.0,250.0,150,"BLUE",0);
 	private Ball right_outer = new Ball(550.0,250.0,150,"BLUE",0);
@@ -80,6 +80,9 @@ public class Klask{
 	private boolean right_stopcheck3 = true;
 	private boolean left_stopcheck4 = true;
 	private boolean right_stopcheck4 = true;
+
+	//ball for the the main ball to collide with
+	private Ball collide_ball = new Ball(0.0,0.0,20,"BLACK",0);
 
 
 
@@ -168,20 +171,80 @@ public class Klask{
 				right_stopcheck4 = false;
 			}
 
-			if(the_ball.collides(left_puckball) || the_ball.collides(right_puckball))
-			{
-				//if((ballmove_x > ballmove_y && ballmove_y > 0) || (ballmove_x > ballmove_y && ballmove_y>0) || (ballmove_x < ballmove_y && ballmove_x < 0) || (ballmove_x > ballmove_y && ballmove_x < 0 && ballmove_y < 0))
-				//{
-				//	ballmove_x = ballmove_x - (ballmove_x *2);
-				//}
-				//if((ballmove_y > ballmove_x && ballmove_x > 0) || (ballmove_y > ballmove_x && ballmove_x>0) || (ballmove_y < ballmove_x && ballmove_y < 0) || (ballmove_y > ballmove_x && ballmove_y < 0 && ballmove_x < 0))
-				//{
-				//	ballmove_y = ballmove_y - (ballmove_y *2);
-				//}
-				ballmove_y = ballmove_y - (ballmove_y *2);
-				ballmove_x = ballmove_x - (ballmove_x *2);
+			if(the_ball.collides(left_puckball)){
 
+				if(the_ball.getXPosition() < (left_puckball.getXPosition() +5) && the_ball.getXPosition() > (left_puckball.getXPosition() - 5) && (the_ball.getYPosition() < (left_puckball.getYPosition()))){
+					ballmove_x = 0.0;
+					ballmove_y = -3.0;
+				}
+				else if(the_ball.getXPosition() < (left_puckball.getXPosition() +5) && the_ball.getXPosition() > (left_puckball.getXPosition() - 5) && (the_ball.getYPosition() > (left_puckball.getYPosition()))){
+					ballmove_x = 0.0;
+					ballmove_y = 3.0;
+				}
+				
+				else if(the_ball.getXPosition() > (left_puckball.getXPosition() +5) && the_ball.getYPosition() < left_puckball.getYPosition()){
+					ballmove_x = 3.0;
+					ballmove_y = -3.0;
+				}
+				else if(the_ball.getXPosition() < (left_puckball.getXPosition() -5) && the_ball.getYPosition() < left_puckball.getYPosition() ){
+					ballmove_x = -3;
+					ballmove_y = -3;
+				}
+				else if(the_ball.getXPosition() < (left_puckball.getXPosition() - 5) && the_ball.getYPosition() > left_puckball.getYPosition() && the_ball.getXPosition() > (left_puckball.getXPosition() - 15)){
+					ballmove_x = -3;
+					ballmove_y = 3;
+				}
+				else if(the_ball.getXPosition() > (left_puckball.getXPosition() +5) && the_ball.getYPosition() > left_puckball.getYPosition() && the_ball.getXPosition() < (left_puckball.getXPosition() +15)){
+					ballmove_x = 3;
+					ballmove_y = 3;
+				}
+				else if(the_ball.getYPosition() <(left_puckball.getYPosition() +5) && the_ball.getYPosition() > (left_puckball.getYPosition() - 5) && the_ball.getXPosition() > (left_puckball.getXPosition())){
+					ballmove_x = 3.0;
+					ballmove_y = 0.0;
+				}
+				else if(the_ball.getYPosition() <(left_puckball.getYPosition() +5) && the_ball.getYPosition() > (left_puckball.getYPosition() - 5) && the_ball.getXPosition() < (left_puckball.getXPosition())){
+					ballmove_x = -3.0;
+					ballmove_y = 0.0;
+				}
 			}
+			if(the_ball.collides(right_puckball)){
+
+				if(the_ball.getXPosition() < (right_puckball.getXPosition() +5) && the_ball.getXPosition() > (right_puckball.getXPosition() - 5) && (the_ball.getYPosition() < (right_puckball.getYPosition()))){
+					ballmove_x = 0.0;
+					ballmove_y = -3.0;
+				}
+				else if(the_ball.getXPosition() < (right_puckball.getXPosition() +5) && the_ball.getXPosition() > (right_puckball.getXPosition() - 5) && (the_ball.getYPosition() > (right_puckball.getYPosition()))){
+					ballmove_x = 0.0;
+					ballmove_y = 3.0;
+				}
+				
+				else if(the_ball.getXPosition() > (right_puckball.getXPosition() +5) && the_ball.getYPosition() < right_puckball.getYPosition()){
+					ballmove_x = 3.0;
+					ballmove_y = -3.0;
+				}
+				else if(the_ball.getXPosition() < (right_puckball.getXPosition() -5) && the_ball.getYPosition() < right_puckball.getYPosition() ){
+					ballmove_x = -3;
+					ballmove_y = -3;
+				}
+				else if(the_ball.getXPosition() < (right_puckball.getXPosition() - 5) && the_ball.getYPosition() > right_puckball.getYPosition() && the_ball.getXPosition() > (right_puckball.getXPosition() - 15)){
+					ballmove_x = -3;
+					ballmove_y = 3;
+				}
+				else if(the_ball.getXPosition() > (right_puckball.getXPosition() +5) && the_ball.getYPosition() > right_puckball.getYPosition() && the_ball.getXPosition() < (right_puckball.getXPosition() +15)){
+					ballmove_x = 3;
+					ballmove_y = 3;
+				}
+				else if(the_ball.getYPosition() <(right_puckball.getYPosition() +5) && the_ball.getYPosition() > (right_puckball.getYPosition() - 5) && the_ball.getXPosition() > (right_puckball.getXPosition())){
+					ballmove_x = 3.0;
+					ballmove_y = 0.0;
+				}
+				else if(the_ball.getYPosition() <(right_puckball.getYPosition() +5) && the_ball.getYPosition() > (right_puckball.getYPosition() - 5) && the_ball.getXPosition() < (right_puckball.getXPosition())){
+					ballmove_x = -3.0;
+					ballmove_y = 0.0;
+				}
+			}
+
+
 			if(the_ball.getXPosition() >= 690.0 || the_ball.getXPosition() <= 110.0 )
 			{
 				if(ballmove_y != 0.0){
@@ -324,20 +387,21 @@ public class Klask{
 			}
 			if (the_ball.collides(left_goal) == true )
 			{
-				left_scorecount = left_scorecount + 1;
-				leftscore_string = Integer.toString(left_scorecount);
-				left_score.setText(leftscore_string);
-				the_ball.setXPosition(450.0);
-				the_ball.setYPosition(250.0);
-			}
-			if (the_ball.collides(right_goal) == true)
-			{
 				right_scorecount = right_scorecount + 1;
 				rightscore_string = Integer.toString(right_scorecount);
 				right_score.setText(rightscore_string);
 				the_ball.setXPosition(350.0);
 				the_ball.setYPosition(250.0);
 
+			}
+
+			if (the_ball.collides(right_goal) == true)
+			{
+				left_scorecount = left_scorecount + 1;
+				leftscore_string = Integer.toString(left_scorecount);
+				left_score.setText(leftscore_string);
+				the_ball.setXPosition(450.0);
+				the_ball.setYPosition(250.0);
 			}
 
 			if(left_scorecount== 6 || right_scorecount == 6)
@@ -347,16 +411,16 @@ public class Klask{
 			}
 			if (ballmove_x < 0.0)
 			{
-				ballmove_x = ballmove_x + 0.007;
+				ballmove_x = ballmove_x + 0.01;
 			}
 			if (ballmove_x > 0.0){
-				ballmove_x = ballmove_x - 0.007;
+				ballmove_x = ballmove_x - 0.01;
 			}
 			if(ballmove_y < 0.0){
-				ballmove_y = ballmove_y + 0.007;
+				ballmove_y = ballmove_y + 0.01;
 			}
 			if (ballmove_y > 0.0){
-				ballmove_y = ballmove_y - 0.007;
+				ballmove_y = ballmove_y - 0.01;
 			}
 			left_stopcheck3 = true;
 			right_stopcheck3 = true;
