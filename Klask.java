@@ -66,14 +66,21 @@ public class Klask{
 	//the left puck coordinates
 	private double left_x;
 	private double left_y;
-	//puck pos
-	private double puckx;
-	private double pucky;
+
 	//connections
 	private boolean top_connect = false;
 	private boolean middle_connect =false;
 	private boolean bottom_connect = false;
-	// to calculate decreasing speed;
+	// Checks if the game piece cant go any further
+	private boolean left_stopcheck1 = true;
+	private boolean right_stopcheck1 = true;
+	private boolean left_stopcheck2 = true;
+	private boolean right_stopcheck2 = true;
+	private boolean left_stopcheck3 = true;
+	private boolean right_stopcheck3 = true;
+	private boolean left_stopcheck4 = true;
+	private boolean right_stopcheck4 = true;
+
 
 
 
@@ -136,7 +143,30 @@ public class Klask{
 		while(game_loop == true){
 
 
-
+			if(left_puckball.getXPosition() == 390.0){
+				left_stopcheck3 = false;
+			}
+			if(right_puckball.getXPosition() == 410.0){
+				right_stopcheck1 = false;
+			}
+			if(left_puckball.getXPosition() == 110.0){
+				left_stopcheck1 = false;
+			}
+			if(right_puckball.getXPosition() == 690.0){
+				right_stopcheck3 = false;
+			}
+			if(left_puckball.getYPosition() == 110.0){
+				left_stopcheck2 = false;
+			}
+			if(right_puckball.getYPosition() == 110.0){
+				right_stopcheck2 = false;
+			}
+			if(left_puckball.getYPosition() == 390.0){
+				left_stopcheck4 = false;
+			}
+			if(right_puckball.getYPosition() == 390.0){
+				right_stopcheck4 = false;
+			}
 
 			if(the_ball.collides(left_puckball) || the_ball.collides(right_puckball))
 			{
@@ -175,6 +205,7 @@ public class Klask{
 				}
 			}
 			the_ball.move(ballmove_x,ballmove_y);
+
 			if(left_puckball.collides(left_goal))
 			{
 				right_scorecount = right_scorecount + 1;
@@ -218,43 +249,62 @@ public class Klask{
 
 			if(game1.letterPressed('w') == true)
 			{
-				left_puckball.move(0.0,-2.0);
-				left_outer.move(0.0,-2.0);
+				if(left_stopcheck2 == true){
+					left_puckball.move(0.0,-2.0);
+					left_outer.move(0.0,-2.0);
+				}
 			}
 			if(game1.letterPressed('a') == true)
 			{
-				left_puckball.move(-2.0,0.0);
-				left_outer.move(-2.0,0.0);
+				if(left_stopcheck1 == true)
+				{
+					left_puckball.move(-2.0,0.0);
+					left_outer.move(-2.0,0.0);
+				}
 			}
 			if(game1.letterPressed('d') == true)
 			{
-				left_puckball.move(2.0,0.0);
-				left_outer.move(2.0,0.0);
+				if(left_stopcheck3 == true){
+					left_puckball.move(2.0,0.0);
+					left_outer.move(2.0,0.0);
+				}
+
 			}
 			if(game1.letterPressed('s') == true)
 			{
-				left_puckball.move(0.0,2.0);
-				left_outer.move(0.0,2.0);
+				if(left_stopcheck4 == true)
+				{
+					left_puckball.move(0.0,2.0);
+					left_outer.move(0.0,2.0);
+				}
 			}
 			if(game1.rightPressed() == true)
 			{
-				right_puckball.move(2.0,0.0);
-				right_outer.move(2.0,0.0);
+				if(right_stopcheck3 == true){
+					right_puckball.move(2.0,0.0);
+					right_outer.move(2.0,0.0);
+				}
 			}
 			if(game1.leftPressed() == true)
 			{
-				right_puckball.move(-2.0,0.0);
-				right_outer.move(-2.0,0.0);
+				if(right_stopcheck1 == true){
+					right_puckball.move(-2.0,0.0);
+					right_outer.move(-2.0,0.0);
+				}	
 			}
 			if(game1.upPressed() == true)
 			{
-				right_puckball.move(0.0,-2.0);
-				right_outer.move(0.0,-2.0);
+				if(right_stopcheck2 == true){
+					right_puckball.move(0.0,-2.0);
+					right_outer.move(0.0,-2.0);
+				}
 			}
 			if(game1.downPressed() == true)
 			{
-				right_puckball.move(0.0,2.0);
-				right_outer.move(0.0,2.0);
+				if(right_stopcheck4 == true){
+					right_puckball.move(0.0,2.0);
+					right_outer.move(0.0,2.0);
+				}
 			}
 			if(game1.letterPressed('i') == true)
 			{
@@ -308,6 +358,14 @@ public class Klask{
 			if (ballmove_y > 0.0){
 				ballmove_y = ballmove_y - 0.007;
 			}
+			left_stopcheck3 = true;
+			right_stopcheck3 = true;
+			left_stopcheck1 = true;
+			right_stopcheck1 = true;
+			left_stopcheck2 = true;
+			right_stopcheck2 = true;
+			left_stopcheck4 = true;
+			right_stopcheck4 = true;
 
 			game1.pause();	
 		}
