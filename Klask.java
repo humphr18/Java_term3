@@ -9,10 +9,10 @@ public class Klask{
 	// Main game ball
 	private Ball the_ball = new Ball(400.0,300.0,10,"YELLOW",6);
 	// Generating the pucks right puck --v
-	private Ball right_puckball = new Ball(550.0,250.0,20,"BLACK",2);
+	private Ball right_puckball = new Ball(550.0,250.0,20,"BLACK",7);
 	private Line right_puckline = new Line(550.0,250.0,550.0,230.0,10,"BLACK",2);
 	// Left puck --v
-	private Ball left_puckball = new Ball(250.0,250.0,20,"BLACK",2);
+	private Ball left_puckball = new Ball(250.0,250.0,20,"BLACK",7);
 	private Line left_puckline = new Line(250.0,250.0,250.0,230.0,10,"BLACK",2);
 	// Making the quatercircles
 	private Ball topleft_ball = new Ball(100.0,100.0,100,"GREY",2);
@@ -37,9 +37,9 @@ public class Klask{
 	// Middle line through the game
 	private Line middle_line = new Line(400.0,0.0,400.0,500.0,0.5,"BLACK",2);
 	// Creating the middle magnets
-	private Ball top_magnet = new Ball(400.0,175.0,10,"WHITE",3);
-	private Ball middle_magnet = new Ball(400.0,250.0,10,"WHITE",3);
-	private Ball bottom_magnet = new Ball(400.0,325.0,10,"WHITE",3);
+	private Ball top_magnet = new Ball(400.0,175.0,10,"WHITE",8);
+	private Ball middle_magnet = new Ball(400.0,250.0,10,"WHITE",8);
+	private Ball bottom_magnet = new Ball(400.0,325.0,10,"WHITE",8);
 	// The scorecounts 
 	private int left_scorecount = 0;
 	private int right_scorecount = 0;
