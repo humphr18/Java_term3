@@ -7,7 +7,7 @@ public class Klask{
 	private Line right_line = new Line(700.0,400.0,700.0,100.0,15.0,"GREY",4);
 	private Line top_line = new Line(700.0,100.0,100.0,100.0,15.0,"GREY",4);
 	// Main game ball
-	private Ball the_ball = new Ball(350.0,250.0,10,"YELLOW",3);
+	private Ball the_ball = new Ball(350.0,250.0,10,"YELLOW",6);
 	// Generating the pucks right puck --v
 	private Ball right_puckball = new Ball(550.0,250.0,20,"BLACK",2);
 	private Line right_puckline = new Line(550.0,250.0,550.0,230.0,10,"BLACK",2);
@@ -53,8 +53,8 @@ public class Klask{
 	//loop to refresh the game
 	private boolean game_loop = true;
 	//the directions of the ball
-	private double ballmove_x = 5.0;
-	private double ballmove_y = 0.0;
+	private double ballmove_x = 10.0;
+	private double ballmove_y = 1.0;
 
 
 /* UI instance variable list:
@@ -72,6 +72,7 @@ public class Klask{
 	left/right_score = the scores
 	top_text = text above the game board
 	game_loopp = boolean, loop through the game
+	ballmove_x/y = movment variable of the ball in double!
 */
 
 
@@ -83,9 +84,9 @@ public class Klask{
 		game1.addLine(right_line);
 		game1.addLine(top_line);
 		game1.addBall(left_puckball);
-		game1.addLine(left_puckline);
+		//game1.addLine(left_puckline);
 		game1.addBall(right_puckball);
-		game1.addLine(right_puckline);
+		//game1.addLine(right_puckline);
 		game1.addRectangle(background);
 		game1.addBall(topleft_ball);
 		game1.addBall(bottomleft_ball);
@@ -116,19 +117,55 @@ public class Klask{
 
 			if(the_ball.collides(left_puckball) || the_ball.collides(right_puckball))
 			{
-				ballmove_y = ballmove_y - (ballmove_y * 2);
-				ballmove_x = ballmove_x - (ballmove_x * 2);
+				//if((ballmove_x > ballmove_y && ballmove_y > 0) || (ballmove_x > ballmove_y && ballmove_y>0) || (ballmove_x < ballmove_y && ballmove_x < 0) || (ballmove_x > ballmove_y && ballmove_x < 0 && ballmove_y < 0))
+				//{
+				//	ballmove_x = ballmove_x - (ballmove_x *2);
+				//}
+				//if((ballmove_y > ballmove_x && ballmove_x > 0) || (ballmove_y > ballmove_x && ballmove_x>0) || (ballmove_y < ballmove_x && ballmove_y < 0) || (ballmove_y > ballmove_x && ballmove_y < 0 && ballmove_x < 0))
+				//{
+				//	ballmove_y = ballmove_y - (ballmove_y *2);
+				//}
+				ballmove_y = ballmove_y - (ballmove_y *2);
+				ballmove_x = ballmove_x - (ballmove_x *2);
+
 			}
-			if(the_ball.collides(left_goal) || the_ball.collides(right_goal))
+			if(the_ball.getXPosition() == 690.0 || the_ball.getXPosition() == 110.0 )
 			{
-				ballmove_y = 0;
-				ballmove_x = 0;
-
+				if(ballmove_y != 0.0){
+					ballmove_x = ballmove_x - (ballmove_x * 2);
+				}
+				else
+				{
+					ballmove_y = ballmove_y - (ballmove_y * 2);
+					ballmove_x = ballmove_x - (ballmove_x * 2);
+				}
+			}
+			if(the_ball.getYPosition() ==390.0 || the_ball.getYPosition() == 110.0)
+			{
+				if(ballmove_x != 0.0){
+					ballmove_y = ballmove_y - (ballmove_y * 2);
+				}
+				else
+				{
+					ballmove_y = ballmove_y - (ballmove_y * 2);
+					ballmove_x = ballmove_x - (ballmove_x * 2);
+				}
+			}
+			if(left_puckball.collides(left_goal))
+			{
+				right_scorecount = right_scorecount + 1;
+				rightscore_string = Integer.toString(right_scorecount);
+				right_score.setText(rightscore_string);
+			}
+			if(right_puckball.collides(right_goal))
+			{
+				left_scorecount = left_scorecount + 1;
+				leftscore_string = Integer.toString(left_scorecount);
+				left_score.setText(leftscore_string);
 			}
 
-			if(the_ball.getXPosition() == 690.0){
-				System.out.println("HELLO");
-			}
+
+
 
 
 			if(game1.letterPressed('w') == true)
@@ -184,19 +221,23 @@ public class Klask{
 				left_scorecount = left_scorecount + 1;
 				leftscore_string = Integer.toString(left_scorecount);
 				left_score.setText(leftscore_string);
+				the_ball.setXPosition(350.0);
+				the_ball.setYPosition(250.0);
 			}
 			if (the_ball.collides(right_goal) == true)
 			{
 				right_scorecount = right_scorecount + 1;
 				rightscore_string = Integer.toString(right_scorecount);
 				right_score.setText(rightscore_string);
+				the_ball.setXPosition(350.0);
+				the_ball.setYPosition(250.0);
 			}
 
-
-
-
-
-
+			if(left_scorecount== 6 || right_scorecount == 6)
+			{
+				top_text.setText("FINISHED!");
+				game_loop = false;
+			}
 			game1.pause();	
 		}
 	}
