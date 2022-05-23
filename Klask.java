@@ -299,6 +299,13 @@ public class Klask{
 				left_puckball.setYPosition(250.0);
 				right_puckball.setXPosition(250.0);
 				right_puckball.setXPosition(550.0);
+				top_x = 0.0; top_y = 0.0; middle_x = 0.0; middle_y = 0.0; bottom_x = 0.0; bottom_y = 0.0;
+				top_magnet.setXPosition(400.0);
+				top_magnet.setYPosition(175.0);
+				middle_magnet.setYPosition(250.0);
+				bottom_magnet.setYPosition(325.0);
+				middle_magnet.setXPosition(400.0);
+				bottom_magnet.setXPosition(400.0);
 
 			}
 			if(right_puckball.collides(right_goal))
@@ -314,6 +321,13 @@ public class Klask{
 				left_puckball.setYPosition(250.0);
 				right_puckball.setXPosition(550.0);
 				right_puckball.setYPosition(250.0);
+				top_x = 0.0; top_y = 0.0; middle_x = 0.0; middle_y = 0.0; bottom_x = 0.0; bottom_y = 0.0;
+				top_magnet.setXPosition(400.0);
+				top_magnet.setYPosition(175.0);
+				middle_magnet.setYPosition(250.0);
+				bottom_magnet.setYPosition(325.0);
+				middle_magnet.setXPosition(400.0);
+				bottom_magnet.setXPosition(400.0);
 
 			}
 			if(top_check == false){
@@ -562,7 +576,7 @@ public class Klask{
 			if((left_puckball.collides(top_magnet) && left_puckball.collides(middle_magnet)) || (left_puckball.collides(top_magnet) && left_puckball.collides(bottom_magnet)) || (left_puckball.collides(middle_magnet) && left_puckball.collides(bottom_magnet))){
 				right_scorecount = right_scorecount + 1;
 				rightscore_string = Integer.toString(right_scorecount);
-				right_score.setText(rightscore_string);
+				right_score.setText(leftscore_string);
 				the_ball.setXPosition(350.0);
 				the_ball.setYPosition(250.0);
 				ballmove_x = 0.0;
@@ -717,7 +731,7 @@ public class Klask{
 
 			if(left_scorecount== 6 || right_scorecount == 6)
 			{
-				top_text.setText("FINISHED!");
+				top_text.setText("FINISHED! Press 'r' to restart");
 				game_loop = false;
 			}
 			if (ballmove_x < 0.0)
@@ -783,11 +797,16 @@ public class Klask{
 
 			game1.pause();	
 		}
-		if(game1.enterPressed()){
+		if(game1.letterPressed('r')){
 			game_loop = true;
 			left_scorecount = 0;
 			right_scorecount = 0;
+			leftscore_string = Integer.toString(left_scorecount);
+			left_score.setText(leftscore_string);
+			rightscore_string = Integer.toString(right_scorecount);
+			right_score.setText(rightscore_string);
 		}
+		game1.pause();
 		}
 
 	}
