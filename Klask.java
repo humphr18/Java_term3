@@ -502,23 +502,23 @@ public class Klask{
 			if(game1.letterPressed('w') == true)
 			{
 				if(left_stopcheck2 == true){
-					left_puckball.move(0.0,-2.0);
-					left_outer.move(0.0,-2.0);
+					left_puckball.move(0.0,-4.0);
+					left_outer.move(0.0,-4.0);
 				}
 			}
 			if(game1.letterPressed('a') == true)
 			{
 				if(left_stopcheck1 == true)
 				{
-					left_puckball.move(-2.0,0.0);
-					left_outer.move(-2.0,0.0);
+					left_puckball.move(-4.0,0.0);
+					left_outer.move(-44.0,0.0);
 				}
 			}
 			if(game1.letterPressed('d') == true)
 			{
 				if(left_stopcheck3 == true){
-					left_puckball.move(2.0,0.0);
-					left_outer.move(2.0,0.0);
+					left_puckball.move(4.0,0.0);
+					left_outer.move(4.0,0.0);
 				}
 
 			}
@@ -526,36 +526,36 @@ public class Klask{
 			{
 				if(left_stopcheck4 == true)
 				{
-					left_puckball.move(0.0,2.0);
-					left_outer.move(0.0,2.0);
+					left_puckball.move(0.0,4.0);
+					left_outer.move(0.0,4.0);
 				}
 			}
 			if(game1.rightPressed() == true)
 			{
 				if(right_stopcheck3 == true){
-					right_puckball.move(2.0,0.0);
-					right_outer.move(2.0,0.0);
+					right_puckball.move(4.0,0.0);
+					right_outer.move(4.0,0.0);
 				}
 			}
 			if(game1.leftPressed() == true)
 			{
 				if(right_stopcheck1 == true){
-					right_puckball.move(-2.0,0.0);
-					right_outer.move(-2.0,0.0);
+					right_puckball.move(-4.0,0.0);
+					right_outer.move(-4.0,0.0);
 				}	
 			}
 			if(game1.upPressed() == true)
 			{
 				if(right_stopcheck2 == true){
-					right_puckball.move(0.0,-2.0);
-					right_outer.move(0.0,-2.0);
+					right_puckball.move(0.0,-4.0);
+					right_outer.move(0.0,-4.0);
 				}
 			}
 			if(game1.downPressed() == true)
 			{
 				if(right_stopcheck4 == true){
-					right_puckball.move(0.0,2.0);
-					right_outer.move(0.0,2.0);
+					right_puckball.move(0.0,4.0);
+					right_outer.move(0.0,4.0);
 				}
 			}
 
@@ -576,6 +576,8 @@ public class Klask{
 				middle_magnet.setXPosition(400.0);
 				bottom_magnet.setXPosition(400.0);
 				bottom_check = false;
+				top_check = false;
+				middle_check = false;
 			}
 			if((right_puckball.collides(top_magnet) && right_puckball.collides(middle_magnet)) || (right_puckball.collides(top_magnet) && right_puckball.collides(bottom_magnet)) || (right_puckball.collides(middle_magnet) && right_puckball.collides(bottom_magnet))){
 				left_scorecount = left_scorecount + 1;
@@ -594,6 +596,8 @@ public class Klask{
 				middle_magnet.setXPosition(400.0);
 				bottom_magnet.setXPosition(400.0);
 				bottom_check = false;
+				top_check = false;
+				middle_check = false;
 			}
 
 
